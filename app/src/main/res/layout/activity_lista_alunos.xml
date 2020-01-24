@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.design.widget.FloatingActionButton
+    <!--<android.support.design.widget.FloatingActionButton
         android:id="@+id/activity_lista_alunos_fab_novo_aluno"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -13,7 +13,20 @@
         android:layout_margin="16dp"
         android:clickable="true"
         android:src="@drawable/ic_action_novo_aluno"
-        android:focusable="true" />
+        android:focusable="true" />-->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/activity_lista_alunos_fab_novo_aluno"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_alignParentRight="true"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/ic_action_novo_aluno" />
 
     <ListView
         android:id="@+id/activity_lista_alunos_listview"
