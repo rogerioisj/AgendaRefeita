@@ -7,7 +7,6 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 @Entity
@@ -52,7 +51,7 @@ public class Aluno implements Serializable {
     }
 
     public String getNome() {
-        return nome + " - " + dataFormatada();
+        return nome;
     }
 
     public String getTelefone() {
@@ -81,9 +80,4 @@ public class Aluno implements Serializable {
         return id > 0;
     }
 
-    private String dataFormatada(){
-        SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
-        return formatador.format(momentoDeCadastro.getTime());
-
-    }
 }

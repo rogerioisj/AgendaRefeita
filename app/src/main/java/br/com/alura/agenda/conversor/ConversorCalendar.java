@@ -1,7 +1,6 @@
 package br.com.alura.agenda.conversor;
 
 import androidx.room.TypeConverter;
-import androidx.room.TypeConverters;
 
 import java.util.Calendar;
 
