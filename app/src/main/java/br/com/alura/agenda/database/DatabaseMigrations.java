@@ -33,5 +33,33 @@ interface DatabaseMigrations {
             database.execSQL("ALTER TABLE Aluno ADD COLUMN momentoDeCadastro INTEGER");
         }
     };
-    Migration[] TODAS_MIGRATIONS = {MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4};
+    Migration MIGRATION_4_5 = new Migration(4, 5) {
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase database) {
+
+            //Criar nova tabela com as informações desejadas;
+            database.execSQL("CREATE TABLE IF NOT EXISTS `Aluno_novo` " +
+                    "(`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `nome` TEXT, " +
+                    "`telefoneFixo` TEXT, " +
+                    "`telefoneCelular` TEXT," +
+                    "`email` TEXT," +
+                    "`momentoDeCadastro` INTEGER)");
+
+            //Copiar dados da tabela antiga para a nova;
+            database.execSQL("INSERT INTO Aluno_novo (id, nome, telefoneFixo, email) " +
+                    "SELECT id," +
+                    " nome," +
+                    " telefone," +
+                    " email FROM Aluno");
+
+            //Remove tabela antiga;
+            database.execSQL("DROP TABLE Aluno");
+
+            //Renomear a tabela nova com o nome da tabela antiga;
+            database.execSQL("ALTER TABLE Aluno_novo RENAME TO Aluno");
+
+
+        }
+    };
+    Migration[] TODAS_MIGRATIONS = {MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5};
 }
