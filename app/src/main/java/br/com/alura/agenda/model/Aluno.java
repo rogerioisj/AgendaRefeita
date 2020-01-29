@@ -18,6 +18,7 @@ public class Aluno implements Serializable {
     private String telefone;
     private String email;
     private Calendar momentoDeCadastro = Calendar.getInstance();
+    private String telefoneCelular;
 
     @Ignore
     public Aluno(String nome, String telefone, String email) {
@@ -34,7 +35,7 @@ public class Aluno implements Serializable {
         this.nome = nome;
     }
 
-    public void setTelefone(String telefone) {
+    public void setTelefoneFixo(String telefone) {
         this.telefone = telefone;
     }
 
@@ -54,7 +55,7 @@ public class Aluno implements Serializable {
         return nome;
     }
 
-    public String getTelefone() {
+    public String getTelefoneFixo() {
         return telefone;
     }
 
@@ -80,4 +81,11 @@ public class Aluno implements Serializable {
         return id > 0;
     }
 
+    public void setTelefoneCelular(String telefoneCelular) {
+        this.telefoneCelular = telefoneCelular;
+    }
+
+    public String getTelefoneCelular() {
+        return telefoneCelular;
+    }
 }

@@ -6,4 +6,6 @@
     <string name="salvar_aluno">Salvar o aluno</string>
     <string name="remover">Remover</string>
     <string name="sobrenome">sobrenome</string>
+    <string name="telefone_celular">Telefone Celular</string>
+    <string name="telefone_fixo">Telefone Fixo</string>
 </resources>
