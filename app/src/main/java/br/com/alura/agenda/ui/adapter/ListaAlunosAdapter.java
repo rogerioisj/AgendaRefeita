@@ -49,7 +49,7 @@ public class ListaAlunosAdapter extends BaseAdapter {
         TextView nome = view.findViewById(R.id.item_aluno_nome);
         nome.setText(aluno.getNome());
         TextView telefoneFixo = view.findViewById(R.id.item_aluno_telefone);
-        telefoneFixo.setText(aluno.getTelefoneFixo());
+        /*telefoneFixo.setText(aluno.getTelefoneFixo());*/
     }
 
     private View criaView(ViewGroup viewGroup) {
