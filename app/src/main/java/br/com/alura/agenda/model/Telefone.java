@@ -11,8 +11,7 @@ public class Telefone {
     @PrimaryKey(autoGenerate = true)
     private int id;
 
-    public Telefone(int alunoId, String numero, TipoTelefone tipo) {
-        this.alunoId = alunoId;
+    public Telefone(String numero, TipoTelefone tipo) {
         this.numero = numero;
         this.tipo = tipo;
     }
