@@ -9,18 +9,20 @@ import androidx.room.TypeConverters;
 
 import br.com.alura.agenda.conversor.ConversorCalendar;
 import br.com.alura.agenda.conversor.ConversorTelefone;
+import br.com.alura.agenda.database.dao.TelefoneDAO;
 import br.com.alura.agenda.model.Aluno;
 import br.com.alura.agenda.model.Telefone;
 
 import static br.com.alura.agenda.database.DatabaseConstantes.AGENDA_DATABASE;
 import static br.com.alura.agenda.database.DatabaseMigrations.TODAS_MIGRATIONS;
 
-@Database(entities = {Aluno.class, Telefone.class},version = 5, exportSchema = false)
+@Database(entities = {Aluno.class, Telefone.class},version = 2, exportSchema = false)
 @TypeConverters({ConversorCalendar.class, ConversorTelefone.class})
 public abstract class AgendaDatabase extends RoomDatabase {
 
 
     public abstract RoomAlunoDAO getRoomAlunoDAO();
+    public abstract TelefoneDAO getTelefoneDAO();
 
     public static AgendaDatabase getInstance(Context context){
         return Room

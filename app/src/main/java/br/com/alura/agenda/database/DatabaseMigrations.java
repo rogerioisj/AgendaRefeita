@@ -4,8 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import br.com.alura.agenda.model.TipoTelefone;
+
+import static br.com.alura.agenda.model.TipoTelefone.FIXO;
+
 interface DatabaseMigrations {
-   Migration MIGRATION_1_2 = new Migration(1, 2) {
+   /*Migration MIGRATION_1_2 = new Migration(1, 2) {
         @Override
         public void migrate(@NonNull SupportSQLiteDatabase database) {
             database.execSQL("ALTER TABLE aluno ADD COLUMN sobrenome TEXT");
@@ -57,9 +61,34 @@ interface DatabaseMigrations {
 
             //Renomear a tabela nova com o nome da tabela antiga;
             database.execSQL("ALTER TABLE Aluno_novo RENAME TO Aluno");
-
-
         }
-    };
-    Migration[] TODAS_MIGRATIONS = {MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5};
+    };*/
+   Migration MIGRATION_1_2 = new Migration(1, 2) {
+       @Override
+       public void migrate(@NonNull SupportSQLiteDatabase database) {
+           database.execSQL("CREATE TABLE IF NOT EXISTS `Aluno_novo` " +
+                   "(`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
+                   " `nome` TEXT, " +
+                   "`email` TEXT," +
+                   "`momentoDeCadastro` INTEGER)");
+           database.execSQL("INSERT INTO Aluno_novo (id, nome, email, momentoDeCadastro) " +
+                   "SELECT id, nome, email, momentoDeCadastro FROM Aluno");
+
+           database.execSQL("CREATE TABLE IF NOT EXISTS `Telefone` (" +
+                   "`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                   "`numero` TEXT, " +
+                   "`tipo` TEXT, " +
+                   "`alunoId` INTEGER NOT NULL)");
+
+           database.execSQL("INSERT INTO Telefone (`numero`, `alunoId`) " +
+                   "SELECT telefoneFixo, id FROM Aluno");
+
+           database.execSQL("UPDATE Telefone SET tipo = ?", new TipoTelefone[] {FIXO});
+
+           database.execSQL("DROP TABLE Aluno");
+
+           database.execSQL("ALTER TABLE Aluno_novo RENAME TO Aluno");
+       }
+   };
+    Migration[] TODAS_MIGRATIONS = {MIGRATION_1_2};
 }

@@ -6,7 +6,7 @@ import br.com.alura.agenda.model.TipoTelefone;
 
 public class ConversorTelefone {
     @TypeConverter
-    public String paraString (TipoTelefone tipo){
+    public String paraString(TipoTelefone tipo){
         return tipo.name();
     }
 

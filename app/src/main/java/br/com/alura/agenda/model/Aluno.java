@@ -15,15 +15,12 @@ public class Aluno implements Serializable {
     @PrimaryKey(autoGenerate = true)
     private int id = 0;
     private String nome;
-    //private String telefoneFixo;
     private String email;
     private Calendar momentoDeCadastro = Calendar.getInstance();
-    //private String telefoneCelular;
 
     @Ignore
-    public Aluno(String nome, String telefoneFixo, String email) {
+    public Aluno(String nome/*, String telefoneFixo*/, String email) {
         this.nome = nome;
-        //this.telefoneFixo = telefoneFixo;
         this.email = email;
     }
 
@@ -34,10 +31,6 @@ public class Aluno implements Serializable {
     public void setNome(String nome) {
         this.nome = nome;
     }
-
-    /*public void setTelefoneFixo(String telefone) {
-        this.telefoneFixo = telefone;
-    }*/
 
     public void setEmail(String email) {
         this.email = email;
@@ -55,19 +48,15 @@ public class Aluno implements Serializable {
         return nome;
     }
 
-    /*public String getTelefoneFixo() {
-        return telefoneFixo;
-    }*/
-
     public String getEmail() {
         return email;
     }
 
-    /*@NonNull
+    @NonNull
     @Override
     public String toString() {
-        return nome + " - " + telefoneFixo;
-    }*/
+        return nome;
+    }
 
     public void setId(int id) {
         this.id = id;
@@ -80,12 +69,4 @@ public class Aluno implements Serializable {
     public boolean temIdValido() {
         return id > 0;
     }
-
-    /*public void setTelefoneCelular(String telefoneCelular) {
-        this.telefoneCelular = telefoneCelular;
-    }*/
-
-    /*public String getTelefoneCelular() {
-        return telefoneCelular;
-    }*/
 }
