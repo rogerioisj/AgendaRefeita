@@ -1,7 +1,5 @@
 package br.com.alura.agenda.asynctask;
 
-import android.os.AsyncTask;
-
 import java.util.List;
 
 import br.com.alura.agenda.database.RoomAlunoDAO;
@@ -11,7 +9,7 @@ import br.com.alura.agenda.model.Telefone;
 
 import static br.com.alura.agenda.model.TipoTelefone.FIXO;
 
-public class EditaAlunoTask extends AsyncTask<Void, Void, Void> {
+public class EditaAlunoTask extends BaseAlunoComTelefoneTask {
 
     private final RoomAlunoDAO alunoDAO;
     private final Aluno aluno;
@@ -19,21 +17,20 @@ public class EditaAlunoTask extends AsyncTask<Void, Void, Void> {
     private final Telefone telefoneCelular;
     private final TelefoneDAO telefoneDAO;
     private final List<Telefone> telefonesDoAluno;
-    private final AlunoEditadoListener listener;
 
     public EditaAlunoTask(RoomAlunoDAO alunoDAO,
                           Aluno aluno,
                           Telefone telefoneFixo,
                           Telefone telefoneCelular,
-                          TelefoneDAO telefoneDAO, List<Telefone> telefonesDoAluno, AlunoEditadoListener listener) {
+                          TelefoneDAO telefoneDAO, List<Telefone> telefonesDoAluno, FinalizadaListener listener) {
 
+        super(listener);
         this.telefoneDAO = telefoneDAO;
         this.telefonesDoAluno = telefonesDoAluno;
         this.alunoDAO = alunoDAO;
         this.aluno = aluno;
         this.telefoneFixo = telefoneFixo;
         this.telefoneCelular = telefoneCelular;
-        this.listener = listener;
     }
 
     @Override
@@ -48,11 +45,6 @@ public class EditaAlunoTask extends AsyncTask<Void, Void, Void> {
         return null;
     }
 
-    @Override
-    protected void onPostExecute(Void aVoid) {
-        super.onPostExecute(aVoid);
-        listener.quandoEditado();
-    }
 
     private void atualizaIdDosTelefones(Telefone telefoneFixo, Telefone telefoneCelular) {
         for (Telefone telefone : telefonesDoAluno) {
@@ -64,13 +56,5 @@ public class EditaAlunoTask extends AsyncTask<Void, Void, Void> {
         }
     }
 
-    private void vinculaAlunoComTelefone(int alunoId, Telefone... telefones) {
-        for (Telefone telefone : telefones) {
-            telefone.setAlunoId(alunoId);
-        }
-    }
 
-    public interface AlunoEditadoListener {
-        void quandoEditado();
-    }
 }
