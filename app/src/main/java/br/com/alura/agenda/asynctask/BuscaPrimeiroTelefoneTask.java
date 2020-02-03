@@ -8,12 +8,13 @@ import br.com.alura.agenda.model.Telefone;
 
 public class BuscaPrimeiroTelefoneTask extends AsyncTask<Void, Void, Telefone> {
     private final TelefoneDAO dao;
-    private final TextView telefone;
+    //private final TextView telefone;
     private final int alunoId;
+    private final PrimeiroTelefoneEncontradoListener listener;
 
-    public BuscaPrimeiroTelefoneTask(TelefoneDAO dao, TextView telefone, int alunoId) {
+    public BuscaPrimeiroTelefoneTask(TelefoneDAO dao, TextView telefone, int alunoId, PrimeiroTelefoneEncontradoListener listener) {
         this.dao = dao;
-        this.telefone = telefone;
+        this.listener = listener;
         this.alunoId = alunoId;
     }
 
@@ -25,6 +26,11 @@ public class BuscaPrimeiroTelefoneTask extends AsyncTask<Void, Void, Telefone> {
     @Override
     protected void onPostExecute(Telefone primeiroTelefone) {
         super.onPostExecute(primeiroTelefone);
-        telefone.setText(primeiroTelefone.getNumero());
+        //telefone.setText(primeiroTelefone.getNumero());
+        listener.quandoEncontrado(primeiroTelefone);
+    }
+
+    public interface PrimeiroTelefoneEncontradoListener{
+        void quandoEncontrado(Telefone telefoneEncontrado);
     }
 }

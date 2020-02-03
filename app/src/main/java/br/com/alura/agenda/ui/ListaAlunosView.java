@@ -46,13 +46,10 @@ public class ListaAlunosView {
     }
 
     public void atualizaAlunos() {
-        //adapter.atualiza(dao.todos());
         new BuscaAlunoTask(dao, adapter).execute();
     }
 
     private void remove(Aluno aluno) {
-        /*dao.remove(aluno);
-        adapter.remove(aluno);*/
         new RemoveAlunoTask(dao, adapter, aluno).execute();
     }
 
